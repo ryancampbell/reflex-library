@@ -8,4 +8,13 @@
 	<!-- text -->
 	<component id="TextLayoutDisplay" class="reflex.text.TextLayoutDisplay" />
 	
+	<!-- table -->
+	<component id="Table" class="reflex.components.Table"/>
+	<component id="Section" class="reflex.components.tableClasses.Section"/>
+	<component id="Row" class="reflex.components.tableClasses.Row"/>
+	<component id="Column" class="reflex.components.tableClasses.Column"/>
+	<component id="Cell" class="reflex.components.tableClasses.Cell"/>
+	<component id="DataProvider" class="reflex.components.tableClasses.DataProvider"/>
+	<component id="TableDisplayProvider" class="reflex.skins.tableSkins.TableDisplayProvider"/>
+	
 </componentPackage>
