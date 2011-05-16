@@ -1,12 +1,12 @@
 package reflex.components.tableClasses
 {
+	import reflex.behaviors.ButtonBehavior;
 	import reflex.binding.Bind;
 	import reflex.binding.DataChange;
 	import reflex.components.Component;
 	import reflex.components.tableInterfaces.ICell;
 	import reflex.components.tableInterfaces.IColumn;
 	import reflex.components.tableInterfaces.IRow;
-	import reflex.skins.tableSkins.CellSkin;
 	
 	[DefaultProperty( "skin" )]
 	public class Cell extends Component implements ICell
@@ -16,7 +16,8 @@ package reflex.components.tableClasses
 		private var _column:IColumn;
 		private var _label:String;
 		private var _icon:Class;
-		private var _selected:Boolean;
+		private var _index:int = -1;
+		private var _selected:Boolean = false;
 		
 		[Bindable(event="rowChange")]
 		public function get row():IRow { return _row; }
@@ -43,14 +44,20 @@ package reflex.components.tableClasses
 			DataChange.change( this, "icon", _icon, _icon = value );
 		}
 		
-		[Bindable(event="selectedChange")]
-		[Inspectable(name="Selected", type=Boolean, defaultValue=false)]
-		public function get selected():Boolean {return _selected; }
-		public function set selected(value:Boolean):void {
-			DataChange.change(this, "selected", _selected, _selected = value);
+		[Bindable(event="indexChange")]
+		public function get index():int { return _index; }
+		public function set index(value:int):void {
+			DataChange.change( this, "index", _index, _index = value );
 		}
 		
-		public function Cell( row:IRow = null, column:IColumn = null, label:String = null, icon:Class = null )
+		[Bindable(event="selectedChange")]
+		[Inspectable(name="Selected", type=Boolean, defaultValue=false)]
+		public function get selected():Boolean { return _selected; }
+		public function set selected( value:Boolean ):void {
+			DataChange.change( this, "selected", _selected, _selected = value );
+		}
+		
+		public function Cell( row:IRow = null, column:IColumn = null, label:String = null, icon:Class = null, index:int = -1, selected:Boolean = false )
 		{
 			super();
 			
@@ -58,10 +65,13 @@ package reflex.components.tableClasses
 			this.column = column;
 			this.label = label;
 			this.icon = icon;
+			this.index = index;
+			this.selected = selected;
 			
-			skin = new CellSkin();
+			behaviors.addItem(new ButtonBehavior(this));
 			
 			Bind.addBinding(this, "skin.label.text", this, "label");
+			Bind.addBinding(this, "skin.currentState", this, "currentState");
 		}
 		
 	}

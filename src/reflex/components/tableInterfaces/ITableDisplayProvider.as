@@ -3,6 +3,12 @@ package reflex.components.tableInterfaces
 	public interface ITableDisplayProvider
 	{
 		
+		function get columnGap():Number;
+		
+		function get rowGap():Number;
+		
+		function get rowPadding():Number;
+		
 		function skinForSection( sectionIndex:int ):Object;
 		
 		function skinForSectionHeader( sectionIndex:int ):Object;
@@ -12,6 +18,10 @@ package reflex.components.tableInterfaces
 		function skinForTableHeader():Object;
 		
 		function skinForColumnHeader( columnIndex:int ):Object;
+		
+		function skinForTableFooter():Object;
+		
+		function skinForColumnFooter( columnIndex:int ):Object;
 		
 		function skinForRow( rowIndex:int, sectionIndex:int = 0 ):Object;
 		

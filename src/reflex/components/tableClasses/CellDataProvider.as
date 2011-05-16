@@ -43,7 +43,7 @@ package reflex.components.tableClasses
 		
 		public function labelForItem( item:Object ):String
 		{
-			return labelProvider ? String( labelProvider.dataForItem( item ) ) : "";
+			return labelProvider ? labelProvider.labelForItem( item ) : "";
 		}
 	}
 }

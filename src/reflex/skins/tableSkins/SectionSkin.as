@@ -1,17 +1,16 @@
 package reflex.skins.tableSkins
 {
-	import reflex.binding.Bind;
 	import reflex.collections.SimpleCollection;
 	import reflex.components.Component;
+	import reflex.components.tableClasses.Header;
 	import reflex.containers.Container;
-	import reflex.layouts.VerticalLayout;
 	import reflex.skins.Skin;
 	
 	public class SectionSkin extends Skin
 	{
 		
 		[Bindable]
-		public var header:Component;
+		public var header:Header;
 		
 		[Bindable]
 		public var container:Container;
@@ -20,14 +19,9 @@ package reflex.skins.tableSkins
 		{
 			super();
 			
-			layout = new VerticalLayout();
-			
-			header = new Component();
+			header = new Header();
 			header.skin = new SectionHeaderSkin();
-			
 			container = new Container();
-			container.layout = new VerticalLayout();
-			
 			content = new SimpleCollection([header, container]);
 		}
 	}

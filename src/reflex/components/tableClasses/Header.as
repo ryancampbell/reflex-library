@@ -1,17 +1,14 @@
 package reflex.components.tableClasses
 {
-	import reflex.components.Component;
-	import reflex.components.Table;
+	import reflex.skins.tableSkins.TableHeaderSkin;
 	
-	public class Header extends Component
-	{
-		private var _table:Table;
-		private var _section:Section;
-		private var _cell:Cell;
-		
+	public class Header extends Row
+	{		
 		public function Header()
 		{
 			super();
+			
+			skin = new TableHeaderSkin();
 		}
 	}
 }

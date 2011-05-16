@@ -11,7 +11,7 @@ package reflex.components.tableInterfaces
 		/**
 		 * 
 		 */
-		function numberOfRows( sectionIndex:int = 0 ):void;
+		function numberOfRows( sectionIndex:int = 0 ):int;
 		
 		/**
 		 * 

@@ -1,11 +1,11 @@
 package reflex.skins.tableSkins
 {
+	import flash.display.GradientType;
 	import flash.display.Sprite;
+	import flash.geom.Matrix;
 	
 	import reflex.collections.SimpleCollection;
 	import reflex.containers.Container;
-	import reflex.layouts.BasicLayout;
-	import reflex.layouts.HorizontalLayout;
 	import reflex.skins.Skin;
 	
 	public class TableHeaderSkin extends Skin
@@ -18,13 +18,8 @@ package reflex.skins.tableSkins
 		{
 			super();
 			
-			layout = new BasicLayout();
-			
 			container = new Container();
-			container.layout = new HorizontalLayout();
-			
 			content = new SimpleCollection([container]);
-			
 		}
 		
 		override public function set target(value:Sprite):void
@@ -40,10 +35,17 @@ package reflex.skins.tableSkins
 		
 		private function target_layoutHandler( event:Event ):void
 		{
-			target.graphics.clear();
-			target.graphics.beginFill( 0x333333 );
-			target.graphics.drawRoundRect( 0, 0, width, height, 5, 5 );
-			target.graphics.endFill();
+			if ( width > 0 && height > 0 )
+			{
+				var matrix:Matrix = new Matrix();
+				matrix.createGradientBox( width, height, Math.PI / 2 );
+			
+				target.graphics.clear();
+				target.graphics.lineStyle( 1, 0xA6A6A6 );
+				target.graphics.beginGradientFill( GradientType.LINEAR, [ 0xDCDCDC, 0xEEEEEE, 0xFFFFFF ], [ 1.0, 1.0, 1.0 ], [ 0, 32, 255 ], matrix );
+				target.graphics.drawRoundRect( 0, 0, width - 1, height - 1, 5, 5 );
+				target.graphics.endFill();
+			}
 		}
 	}
 }

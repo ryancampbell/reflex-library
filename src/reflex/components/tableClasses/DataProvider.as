@@ -7,12 +7,14 @@ package reflex.components.tableClasses
 		
 		public var dataField:String;
 		public var dataFunction:Function;
+		public var labelFunction:Function;
 		public var compareFunction:Function;
 		
-		public function DataProvider( dataField:String = null, dataFunction:Function = null, compareFunction:Function = null )
+		public function DataProvider( dataField:String = null, dataFunction:Function = null, labelFunction:Function = null, compareFunction:Function = null )
 		{
 			this.dataField = dataField;
 			this.dataFunction = dataFunction;
+			this.labelFunction = labelFunction;
 			this.compareFunction = compareFunction;
 		}
 		
@@ -26,9 +28,17 @@ package reflex.components.tableClasses
 				return item;
 		}
 		
+		public function labelForItem( item:Object ):String
+		{
+			if ( labelFunction != null )
+				return labelFunction( dataForItem( item ) );
+			else
+				return String( dataForItem( item ) );
+		}
+		
 		public function compareDataForItems( itemA:Object, itemB:Object ):int
 		{
-			return compareFunction( dataForItem( itemA ), dataForItem( itemB ) );
+			return compareFunction != null ? compareFunction( dataForItem( itemA ), dataForItem( itemB ) ) : 0;
 		}
 	}
 }

@@ -1,12 +1,8 @@
 package reflex.skins.tableSkins
 {
 	import flash.display.Sprite;
-	import flash.text.TextField;
 	
 	import reflex.collections.SimpleCollection;
-	import reflex.containers.Container;
-	import reflex.layouts.BasicLayout;
-	import reflex.layouts.VerticalLayout;
 	import reflex.skins.Skin;
 	import reflex.text.Label;
 	
@@ -20,9 +16,11 @@ package reflex.skins.tableSkins
 		{
 			super();
 			
-			layout = new BasicLayout();
-			
 			label = new Label();
+			label.fontFamily = "Helvetica";
+			label.fontSize = 12;
+			label.bold = true;
+			label.padding = 5;
 			
 			content = new SimpleCollection([label]);
 		}
@@ -40,10 +38,13 @@ package reflex.skins.tableSkins
 		
 		private function target_layoutHandler( event:Event ):void
 		{			
-			target.graphics.clear();
-			target.graphics.beginFill( 0xCCCCCC );
-			target.graphics.drawRoundRect( 0, 0, target.parent.parent.width, height, 5, 5 );
-			target.graphics.endFill();
+			if ( width > 0 && height > 0 )
+			{
+				target.graphics.clear();
+				target.graphics.beginFill( 0xCCCCCC );
+				target.graphics.drawRoundRect( 0, 0, width, height, 5, 5 );
+				target.graphics.endFill();
+			}
 		}
 	}
 }

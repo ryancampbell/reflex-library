@@ -1,13 +1,9 @@
 package reflex.components.tableClasses
 {
-	import mx.collections.IList;
-	
 	import reflex.binding.Bind;
 	import reflex.binding.DataChange;
-	import reflex.components.Component;
 	import reflex.components.tableInterfaces.ISection;
 	import reflex.components.tableInterfaces.ITable;
-	import reflex.skins.tableSkins.SectionSkin;
 	
 	[DefaultProperty( "rows" )]
 	public class Section extends TableComponent implements ISection
@@ -16,6 +12,7 @@ package reflex.components.tableClasses
 		private var _label:String;
 		private var _icon:Class;
 		private var _rows:Array;
+		private var _expanded:Boolean = true;
 		
 		[Bindable(event="labelChange")]
 		public function get label():String { return _label; }
@@ -36,6 +33,12 @@ package reflex.components.tableClasses
 			DataChange.change(this, "rows", _rows, _rows = value);
 		}
 		
+		[Bindable(event="expandedChange")]
+		public function get expanded():Boolean { return _expanded; }
+		public function set expanded(value:Boolean):void {
+			DataChange.change(this, "expanded", _expanded, _expanded = value );
+		}
+		
 		public function Section( rows:Array = null, table:ITable = null )
 		{
 			super();
@@ -43,10 +46,9 @@ package reflex.components.tableClasses
 			this.table = table;
 			this.rows = rows;
 			
-			skin = new SectionSkin();
-			
 			Bind.addBinding(this, "skin.header.skin.label.text", this, "label");
 			Bind.addBinding(this, "skin.container.content", this, "rows");
+			Bind.addBinding(this, "skin.container.visible", this, "expanded");
 		}
 	}
 }

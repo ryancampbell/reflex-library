@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rx:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:rx="http://rx.reflex.io/2010">
+	
+	<rx:Container id="container" />
+	
+	<rx:Rect y="-1" width="{ width }" height="1" visible="{ Object( target ).index != 0 }">
+		<rx:fill>
+			<s:SolidColor color="#BFBFBF" />
+		</rx:fill>
+	</rx:Rect>
+	
+</rx:Skin>

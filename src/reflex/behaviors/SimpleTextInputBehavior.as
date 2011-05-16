@@ -9,6 +9,7 @@ package reflex.behaviors
 	
 	public class SimpleTextInputBehavior extends Behavior
 	{
+		
 		public function SimpleTextInputBehavior(target:IEventDispatcher=null)
 		{
 			super(target);
@@ -22,12 +23,10 @@ package reflex.behaviors
 		
 		[EventListener(type="change", target="textField")]
 		public function onChange(event:Event):void {
-			trace("behavior change: "+ event.target.text);
 			textInput.text = event.target.text;
 			event.stopImmediatePropagation();
 			target.dispatchEvent(event.clone());
 		}
-		
 		
 	}
 }

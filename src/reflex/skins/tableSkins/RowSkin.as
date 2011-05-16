@@ -1,18 +1,28 @@
 package reflex.skins.tableSkins
 {
+	import flash.display.CapsStyle;
+	import flash.display.JointStyle;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import reflex.layouts.HorizontalLayout;
+	import org.osmf.display.ScaleMode;
+	
+	import reflex.collections.SimpleCollection;
+	import reflex.containers.Container;
 	import reflex.skins.Skin;
 	
 	public class RowSkin extends Skin
 	{
+		
+		[Bindable]
+		public var container:Container;
+		
 		public function RowSkin()
 		{
 			super();
 			
-			layout = new HorizontalLayout();
+			container = new Container();
+			content = new SimpleCollection([container]);
 		}
 		
 		override public function set target(value:Sprite):void
@@ -28,11 +38,17 @@ package reflex.skins.tableSkins
 		
 		private function target_layoutHandler( event:Event ):void
 		{
-			target.graphics.clear();
-			target.graphics.beginFill( 0xFFFFFF );
-			target.graphics.lineStyle( 1, 0xCCCCCC );
-			target.graphics.drawRoundRect( 0, 0, width, height, 5, 5 );
-			target.graphics.endFill();
+			var index:int = target.parent ? target.parent.getChildIndex( target ) : 0;
+			var bgColor:uint = index % 2 == 0 ? 0xFFCC00 : 0x00CCFF; 
+			
+			if ( width > 0 && height > 0 )
+			{
+				target.graphics.clear();
+				target.graphics.beginFill( bgColor, .2 );
+				target.graphics.lineStyle( 1, 0xCCCCCC, 1, true, ScaleMode.NONE, CapsStyle.ROUND, JointStyle.ROUND );
+				target.graphics.drawRoundRect( 0, 0, width, height, 5, 5 );
+				target.graphics.endFill();
+			}
 		}
 	}
 }
